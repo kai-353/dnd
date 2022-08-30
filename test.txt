@@ -1,0 +1,10 @@
+[time] [url] [response] [tel]
+
+[2022-08-26T11:33:02.670Z] https://autoprov.gntel.nl/presence/dnd/1/f48eabf507d9f660a1d5c221ad43c45fea26c166/6310001301/?user=$active_user SUCCESS 301 
+[2022-08-26T11:33:02.671Z] https://autoprov.gntel.nl/presence/dnd/1/85c087af125a59a8e3cda144ca05c94c561b3615/6310001302/?user=$active_user SUCCESS 302 
+[2022-08-26T11:35:37.462Z] https://autoprov.gntel.nl/presence/dnd/0/f48eabf507d9f660a1d5c221ad43c45fea26c166/6310001301/?user=$active_user SUCCESS 301 
+[2022-08-26T11:35:37.464Z] https://autoprov.gntel.nl/presence/dnd/0/85c087af125a59a8e3cda144ca05c94c561b3615/6310001302/?user=$active_user SUCCESS 302 
+[2022-08-30T10:57:17.472Z] https://autoprov.gntel.nl/presence/dnd/1/f48eabf507d9f660a1d5c221ad43c45fea26c166/6310001301/?user=$active_user SUCCESS 301 
+[2022-08-30T10:57:17.488Z] https://autoprov.gntel.nl/presence/dnd/1/85c087af125a59a8e3cda144ca05c94c561b3615/6310001302/?user=$active_user SUCCESS 302 
+[2022-08-30T10:57:26.258Z] https://autoprov.gntel.nl/presence/dnd/0/f48eabf507d9f660a1d5c221ad43c45fea26c166/6310001301/?user=$active_user SUCCESS 301 
+[2022-08-30T10:57:26.260Z] https://autoprov.gntel.nl/presence/dnd/0/85c087af125a59a8e3cda144ca05c94c561b3615/6310001302/?user=$active_user SUCCESS 302 
