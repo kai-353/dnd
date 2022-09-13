@@ -140,6 +140,15 @@ table input {
   margin-bottom: 10px;
 }
 
+.dashboard input {
+  width: 200px;
+  height: 30px;
+}
+
+.dashboard input.url {
+  width: 750px;
+}
+
 .form-input {
   display: block;
   width: 90%;

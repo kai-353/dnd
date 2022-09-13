@@ -49,6 +49,20 @@ function DashBoard() {
     }));
   };
 
+  const changePhoneUrl = (e, i) => {
+    setEditMenu((prev) => ({
+      ...prev,
+      editing: {
+        ...prev.editing,
+        phones: [
+          ...prev.editing.phones.map((url, ix) => {
+            return ix === i ? e.target.value : url;
+          }),
+        ],
+      },
+    }));
+  };
+
   useEffect(() => {
     const config = {
       headers: {
@@ -60,12 +74,12 @@ function DashBoard() {
     });
   }, []);
 
-  const add = () => {
+  const addNew = () => {
     setPhonesAmount((prev) => prev + 1);
     setFormData((prev) => ({ ...prev, phones: [...prev.phones.slice(), ""] }));
   };
 
-  const sub = () => {
+  const subNew = () => {
     if (phonesAmount > 1) {
       setPhonesAmount((prev) => prev - 1);
       setFormData((prev) => ({
@@ -73,6 +87,30 @@ function DashBoard() {
         phones: [...prev.phones.slice(0, -1)],
       }));
     }
+  };
+
+  const addUpdate = () => {
+    setEditMenu((prev) => ({
+      ...prev,
+      editing: {
+        ...prev.editing,
+        phones: [...prev.editing.phones, ""],
+      },
+    }));
+  };
+
+  const subUpdate = (i) => {
+    setEditMenu((prev) => ({
+      ...prev,
+      editing: {
+        ...prev.editing,
+        phones: [
+          ...prev.editing.phones.filter((val, ix, arr) => {
+            return ix !== i;
+          }),
+        ],
+      },
+    }));
   };
 
   const create = () => {
@@ -114,6 +152,9 @@ function DashBoard() {
       ...editMenu.editing,
       desc: editMenu.editing.description,
     };
+    editMenu.editing.phones.forEach((el, i) => {
+      coupleData["phone" + i] = el;
+    });
     delete coupleData.phones;
 
     axios
@@ -188,10 +229,10 @@ function DashBoard() {
           ))}
           {/* <input type="text" name="phone[]" placeholder="Beschrijving" /> */}
           <br />
-          <button type="button" onClick={add}>
+          <button type="button" onClick={addNew}>
             Add
           </button>
-          <button type="button" onClick={sub}>
+          <button type="button" onClick={subNew}>
             Remove
           </button>
           <button type="button" onClick={create}>
@@ -223,15 +264,23 @@ function DashBoard() {
               <div key={i}>
                 <input
                   type="text"
-                  value={editMenu.editing["phone" + i]}
+                  value={url}
                   name={"phone" + i}
                   placeholder={"URL" + i}
-                  onChange={changeEditData}
+                  onChange={(e) => changePhoneUrl(e, i)}
+                  className="url"
                 />
+                <button type="button" onClick={() => subUpdate(i)}>
+                  Remove
+                </button>
                 <br />
               </div>
             ))}
             <br />
+            <button type="button" onClick={addUpdate}>
+              Add
+            </button>
+
             <button type="button" onClick={() => update()}>
               Change
             </button>
@@ -254,6 +303,7 @@ function DashBoard() {
               <th>Klantnaam</th>
               <th>Koppeling</th>
               <th>Beschrijving</th>
+              <th>Laatste update</th>
               <th>URLS</th>
             </tr>
           </thead>
@@ -261,8 +311,9 @@ function DashBoard() {
             {couples.map((couple) => (
               <tr key={couple._id}>
                 <th>{couple.name}</th>
-                <th>{`https://website.website.nl/api/dnd/toggle/${couple._id}/<toggle>`}</th>
+                <th>{`http://hooktest.ipservice.nl:8080/api/dnd/toggle/${couple._id}/<toggle>`}</th>
                 <th>{couple.description}</th>
+                <th>{couple.updated_at.slice(0, 22)}</th>
                 {couple.phones.map((url) => (
                   <th key={url}>{url}</th>
                 ))}
@@ -270,10 +321,10 @@ function DashBoard() {
                   <button
                     onClick={() => {
                       const editData = { ...couple };
-                      for (let i = 0; i < couple.phones.length; i++) {
-                        const url = couple.phones[i];
-                        editData[`phone${i}`] = url;
-                      }
+                      // for (let i = 0; i < couple.phones.length; i++) {
+                      //   const url = couple.phones[i];
+                      //   editData[`phone${i}`] = url;
+                      // }
                       setEditMenu({ active: true, editing: editData });
                     }}
                   >
